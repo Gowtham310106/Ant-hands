@@ -5,7 +5,7 @@ export default function About() {
   const PHONE = '+91 9626296198'
   const EMAIL = 'hello@anthands.com'
   const YOUTUBE = 'https://www.youtube.com/@anthandss'
-  const INSTAGRAM = 'https://www.instagram.com/anthands' // Replace with actual Instagram
+  const INSTAGRAM = 'https://www.instagram.com/anthands360?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' // Replace with actual Instagram
   const WHATSAPP = 'https://wa.me/919626296198'
   // ================================
 
