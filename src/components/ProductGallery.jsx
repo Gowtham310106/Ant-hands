@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { ChevronRight } from 'lucide-react'
+import polo from '../assets/poloroid.webp'
+import classic from '../assets/classic.jpg'
+import collage from '../assets/collage.webp'
 
 export default function ProductGallery() {
   const [selectedProduct, setSelectedProduct] = useState(null)
@@ -10,21 +13,21 @@ export default function ProductGallery() {
       name: 'Classic',
       description: 'Timeless rectangle design. Perfect for your favorite moment.',
       price: 79,
-      image: 'https://placehold.co/300x400?text=Classic+Magnet'
+      image: classic
     },
     {
       id: 'polaroid',
       name: 'Polaroid',
       description: 'Vintage Polaroid style. Nostalgic & Instagram-ready.',
       price: 89,
-      image: 'https://placehold.co/300x400?text=Polaroid+Magnet'
+      image: polo
     },
     {
       id: 'collage',
       name: 'Collage',
       description: 'Grid of 4 photos. Tell a story in one magnet.',
       price: 99,
-      image: 'https://placehold.co/300x400?text=Collage+Magnet'
+      image: collage
     }
   ]
 

@@ -30,22 +30,38 @@ export default function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Enhanced Brand Header */}
-        <div className="flex items-center justify-center mb-12">
-          <div className="flex items-center gap-4 bg-white/90 backdrop-blur-xl rounded-3xl px-8 py-4 shadow-2xl border border-amber-100 transform hover:scale-105 transition-transform duration-300">
+        {/* Enhanced Brand Header with Larger Logo */}
+        <div className="flex items-center justify-center mb-16">
+          <div className="flex items-center gap-6 bg-white/90 backdrop-blur-xl rounded-4xl px-10 py-6 shadow-2xl border border-amber-100 transform hover:scale-105 transition-transform duration-300">
+            {/* Larger Logo Image with Border */}
             <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-700 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                AH
+              <div className="relative w-20 h-20 rounded-3xl border-4 border-amber-300 bg-white p-1 shadow-2xl">
+                <img 
+                  src="/logo.jpg" // Replace with your logo path
+                  alt="AntHands Logo" 
+                  className="w-full h-full object-cover rounded-2xl"
+                  onError={(e) => {
+                    // Fallback if logo doesn't exist
+                    e.target.style.display = 'none'
+                    e.target.nextSibling.style.display = 'flex'
+                  }}
+                />
+                {/* Fallback logo - shown only if image fails to load */}
+                <div className="w-full h-full bg-gradient-to-br from-amber-500 to-amber-700 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg hidden">
+                  AH
+                </div>
               </div>
-              <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                <Zap className="w-3 h-3 text-white" />
+              <div className="absolute -top-2 -right-2 w-7 h-7 bg-green-500 rounded-full border-3 border-white flex items-center justify-center shadow-lg">
+                <Zap className="w-4 h-4 text-white" />
               </div>
             </div>
+            
+            {/* Larger Brand Text */}
             <div className="text-center">
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-amber-700 to-rose-600 bg-clip-text text-transparent">
+              <h2 className="text-4xl font-black bg-gradient-to-r from-amber-700 to-rose-600 bg-clip-text text-transparent">
                 AntHands
               </h2>
-              <p className="text-sm text-gray-600 italic font-medium">Work like an ant, deliver like a king</p>
+              <p className="text-base text-gray-600 italic font-semibold mt-1">Work like an ant, deliver like a king</p>
             </div>
           </div>
         </div>
