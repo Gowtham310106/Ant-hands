@@ -16,6 +16,20 @@ export default function Hero() {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-rose-100 rounded-full blur-3xl opacity-30 -z-10" />
 
       <div className="max-w-6xl mx-auto">
+        {/* Brand Header */}
+        <div className="flex items-center justify-center mb-8">
+          <div className="flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-3 shadow-lg border border-amber-200">
+            {/* Logo placeholder - replace with your actual logo image later */}
+            <div className="w-10 h-10 bg-gradient-to-r from-amber-500 to-amber-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
+              AH
+            </div>
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-900">AntHands</h2>
+              <p className="text-xs text-gray-600 italic">Work like an ant</p>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="space-y-6">
@@ -33,11 +47,6 @@ export default function Hero() {
 
             <p className="text-xl text-gray-600">
               Personalized fridge magnets that tell your story. Upload photos, customize style, get delivered to your door.
-            </p>
-
-            {/* Tanglish CTA */}
-            <p className="text-lg text-amber-700 font-medium italic">
-              "Order panna easy — WhatsApp la send pannunga 😊"
             </p>
 
             {/* CTA Buttons */}
