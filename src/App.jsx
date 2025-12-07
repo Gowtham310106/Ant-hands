@@ -1,39 +1,35 @@
-import { useState, useRef } from 'react'
-import Hero from './components/Hero'
-import HowItWorks from './components/HowItWorks'
-import ProductGallery from './components/ProductGallery'
-import OrderForm from './components/OrderForm'
-import Workshops from './components/Workshops'
-import About from './components/About'
-import Footer from './components/Footer'
-import OrderSuccessModal from './components/OrderSuccessModal'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import OrderPage from './pages/OrderPage';
+import { AuthProvider } from './context/AuthContext';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
-  const [showSuccessModal, setShowSuccessModal] = useState(false)
-  const [lastOrder, setLastOrder] = useState(null)
-
-  const handleOrderSuccess = (orderData) => {
-    setLastOrder(orderData)
-    setShowSuccessModal(true)
-  }
-
   return (
-    <div className="bg-white">
-      <Hero />
-      <HowItWorks />
-      <ProductGallery />
-      <OrderForm onOrderSuccess={handleOrderSuccess} />
-      <Workshops />
-      <About />
-      <Footer />
-      {showSuccessModal && (
-        <OrderSuccessModal
-          order={lastOrder}
-          onClose={() => setShowSuccessModal(false)}
-        />
-      )}
-    </div>
-  )
+    <Router>
+      <AuthProvider>
+        <div className="min-h-screen flex flex-col bg-white">
+          <Navbar />
+          <div className="flex-grow">
+            <AnimatePresence mode="wait">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/order" element={<OrderPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </AnimatePresence>
+          </div>
+          <Footer />
+        </div>
+      </AuthProvider>
+    </Router>
+  );
 }
 
-export default App
+export default App;
