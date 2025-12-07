@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
-import { UserPlus, ArrowRight } from 'lucide-react';
+import { UserPlus, ArrowRight, Package } from 'lucide-react';
 
 export default function RegisterPage() {
     const [formData, setFormData] = useState({
@@ -16,6 +16,20 @@ export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
     const { register } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    
+    // Get the previous location or default to order page
+    const from = location.state?.from?.pathname || '/order';
+    const selectedProduct = location.state?.selectedProduct;
+    const fromMessage = location.state?.message;
+
+    // Show special message if coming from product customization
+    useEffect(() => {
+        if (fromMessage) {
+            // You could show a toast or message here
+            console.log(fromMessage);
+        }
+    }, [fromMessage]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,7 +55,11 @@ export default function RegisterPage() {
                 password: formData.password,
                 phone: formData.phone
             });
-            navigate('/order');
+            
+            // Navigate to order page, optionally with product data
+            navigate('/order', { 
+                state: selectedProduct ? { selectedProduct } : {} 
+            });
         } catch (err) {
             setError(err.response?.data?.message || err.response?.data?.errors?.[0]?.msg || 'Registration failed.');
         } finally {
@@ -60,8 +78,23 @@ export default function RegisterPage() {
                 <div className="p-8">
                     <div className="text-center mb-8">
                         <Link to="/" className="text-4xl inline-block mb-2">🐜</Link>
-                        <h2 className="text-2xl font-bold text-gray-900">Join Ant Hands</h2>
-                        <p className="text-gray-500 mt-2">Create an account to start ordering</p>
+                        <h2 className="text-2xl font-bold text-gray-900">Create Your Account</h2>
+                        
+                        {/* Special message if coming from product customization */}
+                        {selectedProduct && (
+                            <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                                <div className="flex items-center gap-2 text-amber-800">
+                                    <Package size={16} />
+                                    <span className="text-sm font-medium">Ready to customize your {selectedProduct.name} magnet!</span>
+                                </div>
+                            </div>
+                        )}
+                        
+                        {fromMessage && (
+                            <p className="text-amber-600 text-sm mt-2">{fromMessage}</p>
+                        )}
+                        
+                        <p className="text-gray-500 mt-2">Sign up to create custom magnets</p>
                     </div>
 
                     {error && (
@@ -150,7 +183,8 @@ export default function RegisterPage() {
                                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                             ) : (
                                 <>
-                                    Create Account <UserPlus size={18} />
+                                    {selectedProduct ? 'Create Account & Continue' : 'Create Account'} 
+                                    <UserPlus size={18} />
                                 </>
                             )}
                         </button>
@@ -159,7 +193,11 @@ export default function RegisterPage() {
                     <div className="mt-8 text-center">
                         <p className="text-gray-600 text-sm">
                             Already have an account?{' '}
-                            <Link to="/login" className="text-amber-600 font-bold hover:text-amber-700 flex items-center justify-center gap-1 mt-2 hover:gap-2 transition-all">
+                            <Link 
+                                to="/login" 
+                                state={location.state} // Pass along the state
+                                className="text-amber-600 font-bold hover:text-amber-700 flex items-center justify-center gap-1 mt-2 hover:gap-2 transition-all"
+                            >
                                 Login here <ArrowRight size={14} />
                             </Link>
                         </p>

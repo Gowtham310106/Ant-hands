@@ -34,15 +34,21 @@ export default function OrderPage() {
     const [successOrder, setSuccessOrder] = useState(null);
 
     // Redirect if not authenticated
-    useEffect(() => {
+  useEffect(() => {
         if (!isAuthenticated) {
-            navigate('/login', { state: { from: { pathname: '/order' } } });
+            navigate('/register', { 
+                state: { 
+                    from: { pathname: '/order' },
+                    message: 'Please create an account to continue with your order'
+                } 
+            });
         } else if (user) {
             // Pre-fill user details
             setFormData(prev => ({
                 ...prev,
                 name: user.name || '',
                 phone: user.phone || '',
+                email: user.email || '',
                 // If user model had address, we'd fill it here
             }));
         }
